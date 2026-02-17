@@ -1,0 +1,69 @@
+<h1 style="text-align:center; margin-bottom:20px;">
+  Gestión de Empleados
+</h1>
+
+<!-- ========================= -->
+<!-- FORMULARIO -->
+<!-- ========================= -->
+
+<form (ngSubmit)="guardarEmpleado()" style="margin-bottom:30px;">
+
+  <input
+    type="text"
+    [(ngModel)]="empleadoSeleccionado.nombre"
+    name="nombre"
+    placeholder="Nombre"
+    required
+  />
+
+  <input
+    type="text"
+    [(ngModel)]="empleadoSeleccionado.cargo"
+    name="cargo"
+    placeholder="Cargo"
+    required
+  />
+
+  <input
+    type="number"
+    [(ngModel)]="empleadoSeleccionado.salario"
+    name="salario"
+    placeholder="Salario"
+    required
+  />
+
+  <button type="submit">
+    {{ empleadoSeleccionado._id ? 'Actualizar' : 'Agregar' }}
+  </button>
+
+</form>
+
+<hr>
+
+<!-- ========================= -->
+<!-- LISTA DE EMPLEADOS -->
+<!-- ========================= -->
+
+<h2>Empleados Registrados</h2>
+
+<div *ngIf="empleados.length === 0">
+  <p>No hay empleados registrados.</p>
+</div>
+
+<ul>
+  <li *ngFor="let e of empleados">
+
+    <strong>{{ e.nombre }}</strong> -
+    {{ e.cargo }} -
+    ${{ e.salario }}
+
+    <button (click)="editarEmpleado(e)">
+      Editar
+    </button>
+
+    <button (click)="eliminarEmpleado(e._id!)">
+      Eliminar
+    </button>
+
+  </li>
+</ul>
